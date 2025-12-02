@@ -1,5 +1,5 @@
 // Хранилище скидок
-let ProductsDiscount = new Map();
+let productsDiscount = new Map();
 
 class Product {
     constructor(name, price) {
@@ -8,11 +8,16 @@ class Product {
     }
 
     setDiscount(discount) {
-        ProductsDiscount.set(this, discount);
+        productsDiscount.set(this, discount);
     }
 
     getDiscount() {
-        return ProductsDiscount.get(this);
+        return productsDiscount.get(this);
+    }
+
+    static removeDiscount(product) {
+        productsDiscount.delete(product);
+        console.log(`Скидка для "${product.name}" удалена`);
     }
 }
 
@@ -39,20 +44,25 @@ console.log('Наушники:', product3.getDiscount() + '%');
 
 //Проверяем что в хранилище
 console.log('\nВ хранилище скидок:');
-console.log('Есть скидка на ноутбук:', ProductsDiscount.has(product1));
-console.log('Есть скидка на телефон:', ProductsDiscount.has(product2));
-console.log('Есть скидка на наушники:', ProductsDiscount.has(product3));
+console.log('Есть скидка на ноутбук:', productsDiscount.has(product1));
+console.log('Есть скидка на телефон:', productsDiscount.has(product2));
+console.log('Есть скидка на наушники:', productsDiscount.has(product3));
 
-//Удаляем телефон
-console.log('\nУдаляем телефон...');
-product2 = null;
+//Удаляем скидку у телефона с помощью статического метода
+console.log('\nУдаляем скидку у телефона...');
+Product.removeDiscount(product2);
 
 //Проверяем изменения
-console.log('\nПосле удаления телефона:');
-console.log('Есть скидка на ноутбук:', ProductsDiscount.has(product1));
-console.log('Есть скидка на телефон:', ProductsDiscount.has(product2));
-console.log('Есть скидка на наушники:', ProductsDiscount.has(product3));
+console.log('\nПосле удаления скидки у телефона:');
+console.log('Есть скидка на ноутбук:', productsDiscount.has(product1));
+console.log('Есть скидка на телефон:', productsDiscount.has(product2));
+console.log('Есть скидка на наушники:', productsDiscount.has(product3));
 
-console.log('\nОстались продукты:');
+console.log('\nОстались скидки:');
 console.log('Ноутбук:', product1.getDiscount() + '%');
+console.log('Телефон:', product2.getDiscount()); // Будет undefined
 console.log('Наушники:', product3.getDiscount() + '%');
+
+//Продукт телефон все еще существует
+console.log('\nПродукт телефон все еще существует:');
+console.log(`Название: ${product2.name}, цена: ${product2.price}`);
