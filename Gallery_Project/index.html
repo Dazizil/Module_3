@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Normalize browser styles-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Галерея</title>
+</head>
+<body>
+
+<!--Форма для добавления своих картинок-->
+<form class="add-form" id="addForm">
+    <input type="text" id="imageName" placeholder="Название изображения" required>
+    <input type="file" id="imageFile" accept="image/*" required>
+    <button type="submit">Добавить в галерею</button>
+</form>
+
+<main class="container">
+    <section class="gallery-section">
+        <h2>Список изображений</h2>
+        <div class="gallery-grid" id="galleryGrid">
+            <!--Карточки будут добавляться сюда через JS-->
+            <div class="loading" id="loadingIndicator">Загрузка изображений...</div>
+        </div>
+    </section>
+
+    <div class="resizer" id="resizer"></div>
+
+    <section class="preview-section">
+        <div class="preview-container" id="previewContainer">
+            <button class="close-preview" id="closePreview">╳</button>
+
+            <img class="preview-image" id="previewImage" src="" alt="Предпросмотр">
+            <p class="preview-title" id="previewTitle">Выберите изображение</p>
+
+            <nav class="nav-buttons">
+                <button class="nav-btn" id="prevBtn">←</button>
+                <button class="nav-btn" id="nextBtn">→</button>
+            </nav>
+        </div>
+    </section>
+</main>
+
+<button class="scroll-to-top" id="scrollToTop">↑</button>
+<div class="drag-coords" id="dragCoords"></div>
+<script src="index.js"></script>
+</body>
+</html>
